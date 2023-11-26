@@ -60,11 +60,12 @@ void Sign::edit() {
         cout << "Enter sign (current - " << getSign() << "): ";
     cin >> sign;
     if (birthday[0]==0 && birthday[1]==0 && birthday[2]==0)
-        cout << "Enter birthday (format: DD.MM.YY): ";
+        cout << "Enter birthday (format: DD MM YY): ";
     else
-        cout << "Enter birthday (format: DD.MM.YY; current - " << getBirthday() << "): ";
+        cout << "Enter birthday (format: DD MM YY; current - " << getBirthday() << "): ";
     cin >> birthday[0] >> birthday[1] >> birthday[2];
     cout << "\033[0m" << endl;
+    printInfo();
 }
 void Sign::save() {
     ofstream file;
