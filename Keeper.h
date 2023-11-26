@@ -19,7 +19,7 @@ public:
 
     int get_len();
 
-    void getBySign(const string& sign);
+    void getByMonth(int month);
 
     Sign* operator[](int index);
     void add(Sign* n_data);

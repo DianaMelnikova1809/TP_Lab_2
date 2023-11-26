@@ -179,18 +179,18 @@ Sign* Keeper::operator[](int index) {
     return nullptr;
 }
 
-void Keeper::getBySign(const string& sign) {
+void Keeper::getByMonth(int month) {
     bool has_obj = false;
     if (head != nullptr) {
         Queue* obj_ptr = head;
-        if (obj_ptr->data->getSign() == sign) {
+        if (obj_ptr->data->getBirthdayMonth() == month) {
             cout << "\033[94m0. ";
             obj_ptr->data->printInfo();
             has_obj = true;
         }
         for (int i = 0; i < len - 1; i++) {
             obj_ptr = obj_ptr->next;
-            if (obj_ptr->data->getSign() == sign) {
+            if (obj_ptr->data->getBirthdayMonth() == month) {
                 cout << "\033[94m" << i + 1 << ". ";
                 obj_ptr->data->printInfo();
                 has_obj = true;

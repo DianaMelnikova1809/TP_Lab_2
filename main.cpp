@@ -5,15 +5,16 @@
 #include <cstdlib>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
-void menuf() {
+void menu() {
     cout << "1. Add an Sign" << endl <<
         "2. Show a list of Sign" << endl <<
         "3. Delete Sign" << endl <<
         "4. Edit Sign" << endl <<
-        "5. Get daya by sign" << endl <<
+        "5. Get daya by birthday month" << endl <<
         "6. Save data" << endl <<
         "7. Load data" << endl <<
         "0. Exit" << endl <<
@@ -28,7 +29,7 @@ void task_1_run() {
     int input_number;
     string input_string, passKey;
     while (input_point != 0) {
-        menuf();
+        menu();
         cin >> input_point;
         system("cls");
         switch (input_point) {
@@ -53,9 +54,9 @@ void task_1_run() {
             keeper->edit(input_number);
             break;
         case 5:
-            cout << "Enter destination to get Sign: ";
-            cin >> input_string;
-            keeper->getBySign(input_string);
+            cout << "Enter month: ";
+            cin >> input_number;
+            keeper->getByMonth(input_number);
             break;
         case 6:
             keeper->save();
@@ -75,16 +76,6 @@ void task_1_run() {
 }
 
 
-
-using namespace std;
-
-struct Sentence {
-    int line_ind;
-    int start_ind;
-    int end_ind;
-    Sentence* next;
-};
-
 int task_2_run() {
     cout << "Enter file name to check: ";
     string file_name;
@@ -99,100 +90,25 @@ int task_2_run() {
         cout << "\033[91m" << e.what() << "\033[0m";
         return 0;
     }
-
-    Sentence* question_sentences = nullptr;
-    Sentence* exclamation_sentences = nullptr;
-
-    string line;
-    int line_ind = 0;
-    int qcount = 0;
-    int ecount = 0;
+    string line, word;
+    cout << "Enter word to find: ";
+    cin >> word;
     while (getline(file, line)) {
-        int start_ind = 0;
-        while (true) {
-            size_t end_ind = line.find_first_of(".?!", start_ind);
-            if (end_ind == string::npos) {
-                break;
+        size_t pos = 0;
+        string sentence;
+        int count = 0;
+        while ((pos = line.find_first_of(".!?")) != string::npos) {
+            sentence = line.substr(0, pos + 1);
+            istringstream iss_sentence(sentence);
+            string temp_word;
+            while (iss_sentence >> temp_word) {
+                if (temp_word == word)
+                    count++;
             }
-            Sentence* sentence = new Sentence;
-            sentence->line_ind = line_ind;
-            sentence->start_ind = start_ind;
-            sentence->end_ind = end_ind;
-            sentence->next = nullptr;
-            if (line[end_ind] == '?') {
-                qcount++;
-                if (question_sentences == nullptr) {
-                    question_sentences = sentence;
-                }
-                else {
-                    Sentence* temp = question_sentences;
-                    while (temp->next != nullptr) {
-                        temp = temp->next;
-                    }
-                    temp->next = sentence;
-                }
-            }
-            else if (line[end_ind] == '!') {
-                ecount++;
-                if (exclamation_sentences == nullptr) {
-                    exclamation_sentences = sentence;
-                }
-                else {
-                    Sentence* temp = exclamation_sentences;
-                    while (temp->next != nullptr) {
-                        temp = temp->next;
-                    }
-                    temp->next = sentence;
-
-                }
-            }
-            start_ind = end_ind + 1;
+            cout << sentence.substr(sentence.find_first_not_of(' ')) << " \033[94m" << count << " times\033[0m" << endl;
+            line.erase(0, pos + 1);
+            count = 0;
         }
-        ++line_ind;
-    }
-    string line_out;
-    Sentence* temp = question_sentences;
-    if (qcount) {
-        cout << "\033[94mQuestion sentences (total: " << qcount << "):\033[0m " << endl;
-        file.clear();
-        file.seekg(0);
-        line_ind = 0;
-        while (getline(file, line)) {
-            while (temp != nullptr && temp->line_ind == line_ind) {
-                line_out = line.substr(temp->start_ind, temp->end_ind - temp->start_ind + 1);
-                cout << line_out.substr(line_out.find_first_not_of(' ')) << endl;
-
-                Sentence* temp2 = temp;
-                temp = temp->next;
-                delete temp2;
-            }
-            line_ind++;
-        }
-    }
-    else {
-        cout << "\033[91mNo Question sentences.\033[0m" << endl;
-    }
-    cout << endl;
-    if (ecount) {
-        cout << "\033[94mExclamation sentences (total: " << ecount << "): \033[0m" << endl;
-        file.clear();
-        file.seekg(0);
-        line_ind = 0;
-        temp = exclamation_sentences;
-        while (getline(file, line)) {
-            while (temp != nullptr && temp->line_ind == line_ind) {
-                line_out = line.substr(temp->start_ind, temp->end_ind - temp->start_ind + 1);
-                cout << line_out.substr(line_out.find_first_not_of(' ')) << endl;
-
-                Sentence* temp2 = temp;
-                temp = temp->next;
-                delete temp2;
-            }
-            line_ind++;
-        }
-    }
-    else {
-        cout << "No exclamation sentences." << endl;
     }
     file.close();
     cout << "Press any key to exit...";

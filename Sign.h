@@ -20,6 +20,7 @@ public:
     string getName() const;
     string getSign() const;
     string getBirthday() const;
+    int getBirthdayMonth();
 
     void setName(const string& sFirstName, const string& sSecondName);
     void setSign(const string& sSign);

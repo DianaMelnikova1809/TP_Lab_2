@@ -31,6 +31,9 @@ string Sign::getBirthday() const {
 string Sign::getSign() const {
     return sign;
 }
+int Sign::getBirthdayMonth() {
+    return birthday[1];
+}
 
 void Sign::setName(const string& sFirstName, const string& sSecondName) {
     this->firstName = sFirstName;
