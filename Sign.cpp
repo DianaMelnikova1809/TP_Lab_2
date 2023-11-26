@@ -1,4 +1,5 @@
 #include "Sign.h"
+#include <string>
 
 using namespace std;
 
