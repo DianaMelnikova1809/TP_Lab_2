@@ -29,4 +29,7 @@ public:
     void printInfo();
     void edit();
     void save();
+
+    friend std::ostream& operator<<(std::ostream& os, const Sign& sign);
+    friend std::istream& operator>>(std::istream& os, Sign& sign);
 };

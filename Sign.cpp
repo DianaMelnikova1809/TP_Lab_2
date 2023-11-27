@@ -83,4 +83,14 @@ void Sign::save() {
     file.close();
 }
 
+std::ostream& operator<<(std::ostream& os, const Sign& sign) {
+    os << sign.getName();
+    return os;
+}
 
+std::istream& operator>>(std::istream& is, Sign& sign) {
+    string fname, sname;
+    is >> fname >> sname;
+    sign.setName(fname, sname);
+    return is;
+}
