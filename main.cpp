@@ -14,7 +14,7 @@ void menu() {
         "2. Show a list of Sign" << endl <<
         "3. Delete Sign" << endl <<
         "4. Edit Sign" << endl <<
-        "5. Get daya by birthday month" << endl <<
+        "5. Get data by birthday month" << endl <<
         "6. Save data" << endl <<
         "7. Load data" << endl <<
         "0. Exit" << endl <<
@@ -40,7 +40,7 @@ void task_1_run() {
             keeper->add(new_Sign);
             break;
         case 2:
-            cout << "\033[94mCount Sign: " << keeper->get_len() << "\033[0m" << endl;
+            cout << "Count Sign: " << keeper->get_len() << "" << endl;
             keeper->show();
             break;
         case 3:
@@ -87,7 +87,7 @@ int task_2_run() {
             throw runtime_error("Error while opening file " + file_name + " to load data.");
     }
     catch (const exception& e) {
-        cout << "\033[91m" << e.what() << "\033[0m";
+        cout << "" << e.what() << "";
         return 0;
     }
     string line, word;
@@ -105,7 +105,7 @@ int task_2_run() {
                 if (temp_word == word)
                     count++;
             }
-            cout << sentence.substr(sentence.find_first_not_of(' ')) << " \033[94m" << count << " times\033[0m" << endl;
+            cout << sentence.substr(sentence.find_first_not_of(' ')) << " " << count << " times" << endl;
             line.erase(0, pos + 1);
             count = 0;
         }
@@ -119,7 +119,7 @@ int task_2_run() {
 
 int main() {
     int task;
-    cout << "chouse task (1/2): ";
+    cout << "Chouse task (1/2): ";
     cin >> task;
     if (task == 1) {
         task_1_run();

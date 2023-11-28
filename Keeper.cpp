@@ -42,7 +42,7 @@ void Keeper::edit(int index) {
         obj_ptr->data->edit();
     }
     else {
-        cout << "\033[93mNo data.\033[0m" << endl;
+        cout << "No data." << endl;
     }
 }
 
@@ -85,7 +85,7 @@ void Keeper::remove(int index) {
         len--;
     }
     else {
-        cout << "\033[93mNo data.\033[0m" << endl;
+        cout << "No data." << endl;
     }
 }
 
@@ -99,7 +99,7 @@ void Keeper::save() {
         }
     }
     catch (const exception& e) {
-        cout << "\033[91m" << e.what() << "\033[0m";
+        cout << "" << e.what() << "";
         return;
     }
     file << len << endl;
@@ -109,7 +109,7 @@ void Keeper::save() {
         obj_ptr->data->save();
         obj_ptr = obj_ptr->next;
     }
-    cout << "\033[92mSaved " << len << " Sign.\033[0m" << endl;
+    cout << "Saved " << len << " Sign." << endl;
 
 }
 
@@ -127,7 +127,7 @@ void Keeper::load() {
         }
     }
     catch (const exception& e) {
-        cout << "\033[91m" << e.what() << "\033[0m" << endl;
+        cout << "" << e.what() << "" << endl;
         return;
     }
     file >> input_len;
@@ -144,22 +144,22 @@ void Keeper::load() {
         new_Sign = new Sign(firstName, secondName, inputSign, birthday);
         add(new_Sign);
     }
-    cout << "\033[92mLoaded  " << len << " Sign.\033[0m" << endl;
+    cout << "Loaded  " << len << " Sign." << endl;
 }
 
 void Keeper::show() {
     if (head != nullptr) {
         Queue* obj_ptr = head;
-        cout << "\033[94m0. ";
+        cout << "0. ";
         obj_ptr->data->printInfo();
         for (int i = 0; i < len - 1; i++) {
             obj_ptr = obj_ptr->next;
-            cout << "\033[94m" << i + 1 << ". ";
+            cout << "" << i + 1 << ". ";
             obj_ptr->data->printInfo();
         }
     }
     else {
-        cout << "\033[93mNo data.\033[0m" << endl;
+        cout << "No data." << endl;
     }
 }
 
@@ -175,7 +175,7 @@ Sign* Keeper::operator[](int index) {
         }
         obj_ptr->data->edit();
     }
-    cout << "\033[93mNo data.\033[0m" << endl;
+    cout << "No data." << endl;
     return nullptr;
 }
 
@@ -184,21 +184,21 @@ void Keeper::getByMonth(int month) {
     if (head != nullptr) {
         Queue* obj_ptr = head;
         if (obj_ptr->data->getBirthdayMonth() == month) {
-            cout << "\033[94m0. ";
+            cout << "0. ";
             obj_ptr->data->printInfo();
             has_obj = true;
         }
         for (int i = 0; i < len - 1; i++) {
             obj_ptr = obj_ptr->next;
             if (obj_ptr->data->getBirthdayMonth() == month) {
-                cout << "\033[94m" << i + 1 << ". ";
+                cout << "" << i + 1 << ". ";
                 obj_ptr->data->printInfo();
                 has_obj = true;
             }
         }
     }
     else
-        cout << "\033[93mNo data.\033[0m" << endl;
+        cout << "No data." << endl;
     if (!has_obj)
-        cout << "\033[93mNo data.\033[0m" << endl;
+        cout << "No data." << endl;
 }

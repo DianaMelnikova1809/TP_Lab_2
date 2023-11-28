@@ -4,22 +4,22 @@
 using namespace std;
 
 Sign::Sign() {
-    cout << "\033[90mSign constructor called\033[0m" << endl;
+    cout << "Sign constructor called" << endl;
 }
 Sign::Sign(string sFirstName, string sSecondName, string sSign, int *sBirthday) : firstName(sFirstName), secondName(sSecondName), sign{sSign} {
     this->birthday[0] = sBirthday[0];
     this->birthday[1] = sBirthday[1];
     this->birthday[2] = sBirthday[2];
-    cout << "\033[90mSign constructor called\033[0m" << endl;
+    cout << "Sign constructor called" << endl;
 }
 Sign::Sign(const Sign &sCopy) : firstName(sCopy.firstName), secondName(sCopy.secondName), sign{sCopy.sign} {
     this->birthday[0] = sCopy.birthday[0];
     this->birthday[1] = sCopy.birthday[1];
     this->birthday[2] = sCopy.birthday[2];
-    cout << "\033[90mSign constructor called\033[0m" << endl;
+    cout << "Sign constructor called" << endl;
 }
 Sign::~Sign() {
-    cout << "\033[90mSign destructor called\033[0m" << endl;
+    cout << "Sign destructor called" << endl;
 }
 
 string Sign::getName() const {
@@ -50,7 +50,7 @@ void Sign::setBirthday(const int sBirthday[3]) {
 
 
 void Sign::printInfo() {
-    cout << "\033[94m[" << getName() << "] - " << getSign() << " (" << getBirthday() << ")\033[0m" << endl;
+    cout << "[" << getName() << "] - " << getSign() << " (" << getBirthday() << ")" << endl;
 }
 void Sign::edit() {
     if (firstName.empty() || secondName.empty())
@@ -68,7 +68,7 @@ void Sign::edit() {
     else
         cout << "Enter birthday (format: DD MM YY; current - " << getBirthday() << "): ";
     cin >> birthday[0] >> birthday[1] >> birthday[2];
-    cout << "\033[0m" << endl;
+    cout << "" << endl;
     printInfo();
 }
 void Sign::save() {
@@ -76,7 +76,7 @@ void Sign::save() {
     string file_name = "Sign.txt";
     file.open(file_name, ios::app);
     if (!file) {
-        cout << "\033[91mError while opening file " << file_name << " to load data.\033[0m";
+        cout << "Error while opening file " << file_name << " to load data.";
         return;
     }
     file << firstName << " " << secondName << endl << sign << endl << birthday[0] << " " << birthday[1] << " " << birthday[2] << endl;

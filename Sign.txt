@@ -1,5 +1,5 @@
-6
-Ruslan Andriec
+7
+Ruslan Andriets
 capricorn
 8 1 2004
 Vika Guseva
@@ -11,6 +11,9 @@ libra
 Renata Chemborisova
 scorion
 11 11 2003
+Alex Petrov
+scorpion
+12 2 1990
 Artemii Berezin
 taurus
 9 5 2003
